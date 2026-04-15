@@ -1,0 +1,55 @@
+{
+  "@@locale": "en",
+  "appTitle": "orb_test_app",
+  "@appTitle": {
+    "description": "Application display title."
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Title on the home placeholder screen."
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title on the settings placeholder screen."
+  },
+  "authTitle": "Sign in",
+  "@authTitle": {
+    "description": "Title on the auth placeholder screen."
+  },
+  "apiErrorUnauthorized": "You need to sign in to continue.",
+  "@apiErrorUnauthorized": {
+    "description": "Shown when the API returns 401."
+  },
+  "apiErrorForbidden": "You don't have permission to do that.",
+  "@apiErrorForbidden": {
+    "description": "Shown when the API returns 403."
+  },
+  "apiErrorNotFound": "We couldn't find what you were looking for.",
+  "@apiErrorNotFound": {
+    "description": "Shown when the API returns 404."
+  },
+  "apiErrorConflict": "That change conflicts with the current state.",
+  "@apiErrorConflict": {
+    "description": "Shown when the API returns 409."
+  },
+  "apiErrorValidation": "Please check your input and try again.",
+  "@apiErrorValidation": {
+    "description": "Fallback for validation failures when no server message is available."
+  },
+  "apiErrorRateLimited": "Too many requests. Please try again later.",
+  "@apiErrorRateLimited": {
+    "description": "Shown when the API returns 429."
+  },
+  "apiErrorInternal": "Something went wrong on our end. Please try again.",
+  "@apiErrorInternal": {
+    "description": "Shown for 5xx server errors."
+  },
+  "apiErrorNetwork": "Network unavailable. Check your connection.",
+  "@apiErrorNetwork": {
+    "description": "Shown for connectivity failures before reaching the server."
+  },
+  "apiErrorUnknown": "An unexpected error occurred.",
+  "@apiErrorUnknown": {
+    "description": "Catch-all API error fallback."
+  }
+}

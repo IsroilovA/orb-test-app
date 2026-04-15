@@ -4,6 +4,8 @@ formatter:
   page_width: 120
 
 analyzer:
+  exclude:
+    - lib/src/core/localization/gen/**
   language:
     strict-casts: false
     strict-inference: true

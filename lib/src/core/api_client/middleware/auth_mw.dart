@@ -96,5 +96,4 @@ class ApiClientAuthMiddleware implements ApiClientMiddleware {
       }
     }
   };
-
 }

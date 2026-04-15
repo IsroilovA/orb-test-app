@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
+import 'package:orb_test_app/src/core/localization/l10n.dart';
 
 part 'api_error.dart';
 part 'api_model.dart';

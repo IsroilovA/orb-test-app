@@ -1,0 +1,16 @@
+{
+  "@@locale": "uz",
+  "appTitle": "orb_test_app",
+  "homeTitle": "Bosh sahifa",
+  "settingsTitle": "Sozlamalar",
+  "authTitle": "Kirish",
+  "apiErrorUnauthorized": "Davom etish uchun tizimga kiring.",
+  "apiErrorForbidden": "Bu amalga ruxsatingiz yoʻq.",
+  "apiErrorNotFound": "Qidirgan narsangiz topilmadi.",
+  "apiErrorConflict": "Oʻzgarish joriy holat bilan ziddir.",
+  "apiErrorValidation": "Kiritilgan maʼlumotlarni tekshirib, qaytadan urinib koʻring.",
+  "apiErrorRateLimited": "Soʻrovlar juda koʻp. Keyinroq urinib koʻring.",
+  "apiErrorInternal": "Nimadir xato ketdi. Qaytadan urinib koʻring.",
+  "apiErrorNetwork": "Tarmoq mavjud emas. Ulanishni tekshiring.",
+  "apiErrorUnknown": "Kutilmagan xatolik yuz berdi."
+}

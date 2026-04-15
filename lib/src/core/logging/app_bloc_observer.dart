@@ -21,7 +21,7 @@ class AppBlocObserver extends BlocObserver {
       AppLogger.debug(
         _tag,
         '${bloc.runtimeType} ${transition.event.runtimeType}: '
-            '${transition.currentState.runtimeType} -> ${transition.nextState.runtimeType}',
+        '${transition.currentState.runtimeType} -> ${transition.nextState.runtimeType}',
       );
     }
     super.onTransition(bloc, transition);

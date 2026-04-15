@@ -1,0 +1,16 @@
+{
+  "@@locale": "ru",
+  "appTitle": "orb_test_app",
+  "homeTitle": "Главная",
+  "settingsTitle": "Настройки",
+  "authTitle": "Вход",
+  "apiErrorUnauthorized": "Необходимо войти в систему.",
+  "apiErrorForbidden": "У вас нет прав для этого действия.",
+  "apiErrorNotFound": "Мы не нашли то, что вы искали.",
+  "apiErrorConflict": "Конфликт с текущим состоянием.",
+  "apiErrorValidation": "Проверьте введённые данные и попробуйте снова.",
+  "apiErrorRateLimited": "Слишком много запросов. Попробуйте позже.",
+  "apiErrorInternal": "Что-то пошло не так. Попробуйте ещё раз.",
+  "apiErrorNetwork": "Нет соединения. Проверьте подключение к сети.",
+  "apiErrorUnknown": "Произошла непредвиденная ошибка."
+}
