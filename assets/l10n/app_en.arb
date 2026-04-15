@@ -12,9 +12,69 @@
   "@settingsTitle": {
     "description": "Title on the settings placeholder screen."
   },
-  "authTitle": "Sign in",
-  "@authTitle": {
-    "description": "Title on the auth placeholder screen."
+  "authLoginTitle": "Sign in",
+  "@authLoginTitle": {
+    "description": "Title on the auth screen when in login mode."
+  },
+  "authSignupTitle": "Create account",
+  "@authSignupTitle": {
+    "description": "Title on the auth screen when in signup mode."
+  },
+  "authEmailLabel": "Email",
+  "@authEmailLabel": {
+    "description": "Label for the email input field."
+  },
+  "authPasswordLabel": "Password",
+  "@authPasswordLabel": {
+    "description": "Label for the password input field."
+  },
+  "authLoginCta": "Sign in",
+  "@authLoginCta": {
+    "description": "Submit button label in login mode."
+  },
+  "authSignupCta": "Create account",
+  "@authSignupCta": {
+    "description": "Submit button label in signup mode."
+  },
+  "authGoogleCta": "Continue with Google",
+  "@authGoogleCta": {
+    "description": "Mocked Google sign-in button label."
+  },
+  "authToggleToSignup": "No account yet? Create one",
+  "@authToggleToSignup": {
+    "description": "Link shown in login mode to switch to signup."
+  },
+  "authToggleToLogin": "Already have an account? Sign in",
+  "@authToggleToLogin": {
+    "description": "Link shown in signup mode to switch to login."
+  },
+  "authSignOutCta": "Sign out",
+  "@authSignOutCta": {
+    "description": "Sign out button label on the home screen."
+  },
+  "authErrorInvalidCredentials": "Incorrect email or password.",
+  "@authErrorInvalidCredentials": {
+    "description": "Shown when login credentials don't match."
+  },
+  "authErrorEmailAlreadyExists": "An account with this email already exists.",
+  "@authErrorEmailAlreadyExists": {
+    "description": "Shown when signup email collides with an existing account."
+  },
+  "authErrorInvalidEmail": "Please enter a valid email address.",
+  "@authErrorInvalidEmail": {
+    "description": "Client-side email format validation failure."
+  },
+  "authErrorWeakPassword": "Password must be at least 6 characters.",
+  "@authErrorWeakPassword": {
+    "description": "Client-side password length validation failure."
+  },
+  "authErrorStorage": "We couldn't save your session. Please try again.",
+  "@authErrorStorage": {
+    "description": "Secure storage read/write failure."
+  },
+  "authErrorUnknown": "Something went wrong. Please try again.",
+  "@authErrorUnknown": {
+    "description": "Auth error fallback."
   },
   "apiErrorUnauthorized": "You need to sign in to continue.",
   "@apiErrorUnauthorized": {
