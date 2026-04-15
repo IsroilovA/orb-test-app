@@ -6,9 +6,16 @@ version: 0.1.0+1
 environment:
   sdk: ^3.11.1
 
+workspace:
+  - local_packages/orb_ui_kit
+
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
+  http: ^1.2.2
+  meta: ^1.16.0
+  orb_ui_kit: ^0.0.1
 
 dev_dependencies:
   flutter_test:
