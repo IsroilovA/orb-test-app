@@ -1,3 +1,8 @@
+# Documentation (keep README.md and CHANGELOG.md tracked)
+*.md
+!README.md
+!CHANGELOG.md
+
 # Miscellaneous
 *.class
 *.log
