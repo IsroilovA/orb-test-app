@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helm/helm.dart';
 import 'package:orb_test_app/src/app/root_scope.dart';
 import 'package:orb_test_app/src/core/localization/l10n.dart';
+import 'package:orb_test_app/src/core/routing/orb_routes.dart';
 import 'package:orb_test_app/src/features/home/bloc/home_bloc.dart';
 import 'package:orb_test_app/src/features/home/common/model/home_error.dart';
 import 'package:orb_test_app/src/features/home/widget/home_businesses_section.dart';
@@ -16,7 +18,16 @@ class HomeScreen extends StatelessWidget {
       create: (context) =>
           HomeBloc(homeRepository: RootScope.of(context).homeRepository)..add(const HomeStarted()),
       child: Scaffold(
-        appBar: AppBar(title: Text(context.l10n.homeTitle)),
+        appBar: AppBar(
+          title: Text(context.l10n.homeTitle),
+          actions: <Widget>[
+            IconButton(
+              tooltip: context.l10n.homeSettingsTooltip,
+              onPressed: () => HelmRouter.push(context, OrbRoutes.settings),
+              icon: const Icon(Icons.settings_rounded),
+            ),
+          ],
+        ),
         body: SafeArea(
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
@@ -55,10 +66,10 @@ class HomeScreen extends StatelessWidget {
               }
 
               return ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                 children: <Widget>[
-                  HomeUserSection(user: overview.user),
-                  const SizedBox(height: 24),
+                  HomeUserSection(user: overview.user, businesses: overview.businesses),
+                  const SizedBox(height: 28),
                   HomeBusinessesSection(businesses: overview.businesses),
                 ],
               );

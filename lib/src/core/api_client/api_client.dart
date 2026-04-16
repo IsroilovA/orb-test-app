@@ -14,9 +14,7 @@ part 'api_model.dart';
 /// {@endtemplate}
 class ApiClient {
   ApiClient({required String baseUrl, Client? client, Iterable<ApiClientMiddleware>? middlewares})
-    : _baseUrl = Uri.parse(
-        baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl,
-      ),
+    : _baseUrl = Uri.parse(baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl),
       assert(!baseUrl.endsWith('//'), 'Invalid base URL.') {
     // Create the HTTP client.
     final internalClient = client ?? Client();
@@ -27,8 +25,7 @@ class ApiClient {
       ...?middlewares,
       /* default middlewares after custom middlewares */
     ];
-    ApiClientHandler mw(ApiClientHandler handler) =>
-        effectiveMiddlewares.reversed.fold(handler, (h, m) => m.call(h));
+    ApiClientHandler mw(ApiClientHandler handler) => effectiveMiddlewares.reversed.fold(handler, (h, m) => m.call(h));
 
     // Create the handler.
     _handler = _createHandler(internalClient, mw);
@@ -46,28 +43,17 @@ class ApiClient {
     }
 
     // Convert all query parameter values to strings
-    final stringQueryParameters = queryParameters?.map(
-      (key, value) => MapEntry(key, value.toString()),
-    );
+    final stringQueryParameters = queryParameters?.map((key, value) => MapEntry(key, value.toString()));
 
     return base.replace(path: '${base.path}/$method', queryParameters: stringQueryParameters);
   }
 
   /// Creates the correct http request based on the body type.
-  static BaseRequest _createRequest(
-    String method,
-    Uri url,
-    Map<String, String>? headers,
-    Object? body,
-  ) {
+  static BaseRequest _createRequest(String method, Uri url, Map<String, String>? headers, Object? body) {
     BaseRequest request;
     if (body is Stream<List<int>>) {
       final streamedRequest = StreamedRequest(method, url);
-      body.listen(
-        streamedRequest.sink.add,
-        onDone: streamedRequest.sink.close,
-        onError: streamedRequest.sink.addError,
-      );
+      body.listen(streamedRequest.sink.add, onDone: streamedRequest.sink.close, onError: streamedRequest.sink.addError);
       request = streamedRequest;
     } else if (body is MultipartFile) {
       final multipartRequest = MultipartRequest(method, url);
@@ -76,9 +62,7 @@ class ApiClient {
     } else {
       final regularRequest = Request(method, url);
       if (body is Map) {
-        final bytes = const JsonEncoder()
-            .fuse(const Utf8Encoder())
-            .convert(body as Map<String, Object?>);
+        final bytes = const JsonEncoder().fuse(const Utf8Encoder()).convert(body as Map<String, Object?>);
         regularRequest.headers
           ..['Content-Type'] = 'application/json; charset=UTF-8'
           ..['Content-Length'] = bytes.length.toString();
@@ -119,14 +103,7 @@ class ApiClient {
     Map<String, String>? headers,
     Map<String, Object>? queryParameters,
     Map<String, Object?>? context,
-  }) => _send(
-    'POST',
-    path,
-    body: body,
-    headers: headers,
-    queryParameters: queryParameters,
-    context: context,
-  );
+  }) => _send('POST', path, body: body, headers: headers, queryParameters: queryParameters, context: context);
 
   Future<ApiClientResponse> postFile(
     String path, {
@@ -138,14 +115,7 @@ class ApiClient {
     Map<String, Object?>? context,
   }) async {
     final file = await MultipartFile.fromPath(fieldName, filePath, contentType: contentType);
-    return _send(
-      'POST',
-      path,
-      body: file,
-      headers: headers,
-      queryParameters: queryParameters,
-      context: context,
-    );
+    return _send('POST', path, body: file, headers: headers, queryParameters: queryParameters, context: context);
   }
 
   Future<ApiClientResponse> put(
@@ -154,14 +124,7 @@ class ApiClient {
     Map<String, String>? headers,
     Map<String, Object>? queryParameters,
     Map<String, Object?>? context,
-  }) => _send(
-    'PUT',
-    path,
-    body: body,
-    headers: headers,
-    queryParameters: queryParameters,
-    context: context,
-  );
+  }) => _send('PUT', path, body: body, headers: headers, queryParameters: queryParameters, context: context);
 
   Future<ApiClientResponse> patch(
     String path, {
@@ -169,14 +132,7 @@ class ApiClient {
     Map<String, String>? headers,
     Map<String, Object>? queryParameters,
     Map<String, Object?>? context,
-  }) => _send(
-    'PATCH',
-    path,
-    body: body,
-    headers: headers,
-    queryParameters: queryParameters,
-    context: context,
-  );
+  }) => _send('PATCH', path, body: body, headers: headers, queryParameters: queryParameters, context: context);
 
   Future<ApiClientResponse> delete(
     String path, {

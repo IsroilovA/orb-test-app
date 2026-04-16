@@ -22,8 +22,7 @@ class SignupScreen extends StatelessWidget {
             child: AuthCredentialsForm(
               submitLabel: l10n.authSignupCta,
               toggleLabel: l10n.authToggleToLogin,
-              buildSubmitEvent: (email, password) =>
-                  AuthSignupSubmitted(email: email, password: password),
+              buildSubmitEvent: (email, password) => AuthSignupSubmitted(email: email, password: password),
               onToggle: () => HelmRouter.pop(context),
             ),
           ),

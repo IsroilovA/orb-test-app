@@ -21,10 +21,7 @@ enum OrbRoutes with Routable {
 
   @override
   PageType get pageType => switch (this) {
-    OrbRoutes.home ||
-    OrbRoutes.settings ||
-    OrbRoutes.login ||
-    OrbRoutes.signup => PageType.material,
+    OrbRoutes.home || OrbRoutes.settings || OrbRoutes.login || OrbRoutes.signup => PageType.material,
   };
 
   @override

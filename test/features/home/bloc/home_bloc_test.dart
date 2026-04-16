@@ -37,10 +37,7 @@ void main() {
     },
     build: () => HomeBloc(homeRepository: homeRepository),
     act: (bloc) => bloc.add(const HomeStarted()),
-    expect: () => <HomeState>[
-      const HomeState(isLoading: true),
-      const HomeState(overview: overview),
-    ],
+    expect: () => <HomeState>[const HomeState(isLoading: true), const HomeState(overview: overview)],
   );
 
   blocTest<HomeBloc, HomeState>(
@@ -52,11 +49,7 @@ void main() {
     act: (bloc) => bloc.add(const HomeStarted()),
     expect: () => <Matcher>[
       isA<HomeState>().having((HomeState state) => state.isLoading, 'isLoading', true),
-      isA<HomeState>().having(
-        (HomeState state) => state.error,
-        'error',
-        isA<HomeLoadFailedError>(),
-      ),
+      isA<HomeState>().having((HomeState state) => state.error, 'error', isA<HomeLoadFailedError>()),
     ],
   );
 
@@ -79,11 +72,7 @@ void main() {
     },
     expect: () => <Matcher>[
       isA<HomeState>().having((HomeState state) => state.isLoading, 'isLoading', true),
-      isA<HomeState>().having(
-        (HomeState state) => state.error,
-        'error',
-        isA<HomeLoadFailedError>(),
-      ),
+      isA<HomeState>().having((HomeState state) => state.error, 'error', isA<HomeLoadFailedError>()),
       isA<HomeState>().having((HomeState state) => state.isLoading, 'isLoading', true),
       isA<HomeState>().having((HomeState state) => state.overview, 'overview', overview),
     ],

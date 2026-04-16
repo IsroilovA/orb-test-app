@@ -87,8 +87,7 @@ class _InheritedAppDependenciesScope extends InheritedWidget {
 
   final AppScopeData data;
 
-  static _InheritedAppDependenciesScope? maybeOf(BuildContext context, {bool listen = true}) =>
-      listen
+  static _InheritedAppDependenciesScope? maybeOf(BuildContext context, {bool listen = true}) => listen
       ? context.dependOnInheritedWidgetOfExactType<_InheritedAppDependenciesScope>()
       : context.getInheritedWidgetOfExactType<_InheritedAppDependenciesScope>();
 

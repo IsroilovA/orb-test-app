@@ -23,8 +23,7 @@ class LoginScreen extends StatelessWidget {
             child: AuthCredentialsForm(
               submitLabel: l10n.authLoginCta,
               toggleLabel: l10n.authToggleToSignup,
-              buildSubmitEvent: (email, password) =>
-                  AuthLoginSubmitted(email: email, password: password),
+              buildSubmitEvent: (email, password) => AuthLoginSubmitted(email: email, password: password),
               onToggle: () => HelmRouter.push(context, OrbRoutes.signup),
             ),
           ),

@@ -14,10 +14,7 @@ final class Session extends Equatable {
   final String accessToken;
   final AuthUser user;
 
-  Map<String, Object?> toJson() => <String, Object?>{
-    'accessToken': accessToken,
-    'user': user.toJson(),
-  };
+  Map<String, Object?> toJson() => <String, Object?>{'accessToken': accessToken, 'user': user.toJson()};
 
   @override
   List<Object?> get props => <Object?>[accessToken, user];

@@ -8,9 +8,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 final class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc({required HomeRepository homeRepository})
-    : _homeRepository = homeRepository,
-      super(const HomeState()) {
+  HomeBloc({required HomeRepository homeRepository}) : _homeRepository = homeRepository, super(const HomeState()) {
     on<HomeEvent>(
       (event, emit) => switch (event) {
         HomeStarted() => _onStarted(event, emit),

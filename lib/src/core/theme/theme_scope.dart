@@ -33,8 +33,7 @@ class ThemeScope extends StatefulWidget {
   final Widget child;
 
   static ThemeMode of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier?.value ??
-      ThemeMode.system;
+      context.dependOnInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier?.value ?? ThemeMode.system;
 
   static ThemeModeNotifier controllerOf(BuildContext context) {
     final notifier = context.getInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier;

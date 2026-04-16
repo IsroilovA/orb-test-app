@@ -34,17 +34,12 @@ void main() {
   setUp(() {
     authRepository = _MockAuthRepository();
     remoteDataSource = _MockHomeRemoteDataSource();
-    repository = HomeRepositoryImpl(
-      authRepository: authRepository,
-      remoteDataSource: remoteDataSource,
-    );
+    repository = HomeRepositoryImpl(authRepository: authRepository, remoteDataSource: remoteDataSource);
   });
 
   test('returns overview for active session', () async {
     when(() => authRepository.currentSession).thenReturn(session);
-    when(
-      () => remoteDataSource.loadBusinesses(userEmail: session.user.email),
-    ).thenAnswer((_) async => businesses);
+    when(() => remoteDataSource.loadBusinesses(userEmail: session.user.email)).thenAnswer((_) async => businesses);
 
     final overview = await repository.loadOverview();
 

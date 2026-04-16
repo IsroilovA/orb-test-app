@@ -8,11 +8,9 @@ abstract interface class HomeRepository {
 }
 
 final class HomeRepositoryImpl implements HomeRepository {
-  const HomeRepositoryImpl({
-    required AuthRepository authRepository,
-    required HomeRemoteDataSource remoteDataSource,
-  }) : _authRepository = authRepository,
-       _remoteDataSource = remoteDataSource;
+  const HomeRepositoryImpl({required AuthRepository authRepository, required HomeRemoteDataSource remoteDataSource})
+    : _authRepository = authRepository,
+      _remoteDataSource = remoteDataSource;
 
   final AuthRepository _authRepository;
   final HomeRemoteDataSource _remoteDataSource;

@@ -41,12 +41,9 @@ void main() {
         ).thenAnswer((_) async => session);
       },
       build: () => AuthBloc(authRepository: authRepository),
-      act: (bloc) =>
-          bloc.add(const AuthLoginSubmitted(email: 'test@test.com', password: 'password')),
+      act: (bloc) => bloc.add(const AuthLoginSubmitted(email: 'test@test.com', password: 'password')),
       expect: () => <Matcher>[isA<AuthSubmitting>(), isA<AuthSuccess>()],
-      verify: (_) => verify(
-        () => authRepository.login(email: 'test@test.com', password: 'password'),
-      ).called(1),
+      verify: (_) => verify(() => authRepository.login(email: 'test@test.com', password: 'password')).called(1),
     );
 
     blocTest<AuthBloc, AuthState>(
@@ -63,9 +60,7 @@ void main() {
       act: (bloc) => bloc.add(const AuthLoginSubmitted(email: 'test@test.com', password: 'wrong!')),
       expect: () => <Matcher>[
         isA<AuthSubmitting>(),
-        predicate<AuthState>(
-          (state) => state is AuthFailure && state.error is AuthInvalidCredentialsError,
-        ),
+        predicate<AuthState>((state) => state is AuthFailure && state.error is AuthInvalidCredentialsError),
       ],
     );
   });
@@ -82,8 +77,7 @@ void main() {
         ).thenAnswer((_) async => session);
       },
       build: () => AuthBloc(authRepository: authRepository),
-      act: (bloc) =>
-          bloc.add(const AuthSignupSubmitted(email: 'new@test.com', password: 'password')),
+      act: (bloc) => bloc.add(const AuthSignupSubmitted(email: 'new@test.com', password: 'password')),
       expect: () => <Matcher>[isA<AuthSubmitting>(), isA<AuthSuccess>()],
     );
 
@@ -98,13 +92,10 @@ void main() {
         ).thenThrow(const AuthEmailAlreadyExistsError());
       },
       build: () => AuthBloc(authRepository: authRepository),
-      act: (bloc) =>
-          bloc.add(const AuthSignupSubmitted(email: 'test@test.com', password: 'password')),
+      act: (bloc) => bloc.add(const AuthSignupSubmitted(email: 'test@test.com', password: 'password')),
       expect: () => <Matcher>[
         isA<AuthSubmitting>(),
-        predicate<AuthState>(
-          (state) => state is AuthFailure && state.error is AuthEmailAlreadyExistsError,
-        ),
+        predicate<AuthState>((state) => state is AuthFailure && state.error is AuthEmailAlreadyExistsError),
       ],
     );
   });

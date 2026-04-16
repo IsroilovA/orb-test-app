@@ -81,10 +81,7 @@ class _AuthCredentialsFormState extends State<AuthCredentialsForm> {
             icon: Icons.account_circle_outlined,
           ),
           const SizedBox(height: 24),
-          OrbTextButton(
-            onPressed: isSubmitting ? null : widget.onToggle,
-            label: widget.toggleLabel,
-          ),
+          OrbTextButton(onPressed: isSubmitting ? null : widget.onToggle, label: widget.toggleLabel),
         ],
       ),
     );
