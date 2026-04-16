@@ -7,7 +7,12 @@ final class HomeState extends Equatable {
   final bool isLoading;
   final Object? error;
 
-  HomeState copyWith({HomeOverview? overview, bool? isLoading, Object? error, bool clearError = false}) => HomeState(
+  HomeState copyWith({
+    HomeOverview? overview,
+    bool? isLoading,
+    Object? error,
+    bool clearError = false,
+  }) => HomeState(
     overview: overview ?? this.overview,
     isLoading: isLoading ?? this.isLoading,
     error: clearError ? null : error ?? this.error,

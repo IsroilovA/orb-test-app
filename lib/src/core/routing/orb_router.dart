@@ -11,7 +11,11 @@ mixin RouterStateMixin<T extends StatefulWidget> on State<T> {
   void initState() {
     super.initState();
     final authGate = AppDependenciesScope.of(context).dependencies.authGate;
-    router = HelmRouter(routes: OrbRoutes.values, refresh: authGate, guards: <NavigationGuard>[_authGuard(authGate)]);
+    router = HelmRouter(
+      routes: OrbRoutes.values,
+      refresh: authGate,
+      guards: <NavigationGuard>[_authGuard(authGate)],
+    );
   }
 }
 

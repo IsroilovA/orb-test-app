@@ -21,5 +21,6 @@ final class HomeBusiness extends Equatable {
   List<Object?> get props => <Object?>[id, name, description, revenue, employeeCount];
 
   @override
-  String toString() => 'HomeBusiness(id: $id, name: $name, revenue: $revenue, employeeCount: $employeeCount)';
+  String toString() =>
+      'HomeBusiness(id: $id, name: $name, revenue: $revenue, employeeCount: $employeeCount)';
 }

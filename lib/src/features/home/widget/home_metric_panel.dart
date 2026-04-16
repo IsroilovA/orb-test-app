@@ -27,7 +27,10 @@ class HomeMetricPanel extends StatelessWidget {
             const SizedBox(height: 14),
             Text(value, style: context.orbTextTheme.titleMedium),
             const SizedBox(height: 4),
-            Text(label, style: context.orbTextTheme.labelMedium.copyWith(color: colorScheme.onSurfaceVariant)),
+            Text(
+              label,
+              style: context.orbTextTheme.labelMedium.copyWith(color: colorScheme.onSurfaceVariant),
+            ),
           ],
         ),
       ),

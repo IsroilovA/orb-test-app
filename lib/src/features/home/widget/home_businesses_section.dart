@@ -30,17 +30,24 @@ class HomeBusinessesSection extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     context.l10n.homeBusinessesSubtitle,
-                    style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(18)),
+              decoration: BoxDecoration(
+                color: colorScheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(18),
+              ),
               child: Text(
                 countFormatter.format(businesses.length),
-                style: context.orbTextTheme.titleSmall.copyWith(color: colorScheme.onSecondaryContainer),
+                style: context.orbTextTheme.titleSmall.copyWith(
+                  color: colorScheme.onSecondaryContainer,
+                ),
               ),
             ),
           ],

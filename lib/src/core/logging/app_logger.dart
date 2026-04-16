@@ -31,7 +31,14 @@ class DeveloperLogOutput implements LogOutput {
 
   @override
   void write(LogLevel level, String tag, String message, [Object? error, StackTrace? stackTrace]) {
-    developer.log(message, name: tag, time: DateTime.now(), level: level.value, error: error, stackTrace: stackTrace);
+    developer.log(
+      message,
+      name: tag,
+      time: DateTime.now(),
+      level: level.value,
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 }
 
@@ -68,7 +75,13 @@ abstract final class AppLogger {
   static void fatal(String tag, String message, [Object? error, StackTrace? stackTrace]) =>
       _dispatch(LogLevel.fatal, tag, message, error, stackTrace);
 
-  static void _dispatch(LogLevel level, String tag, String message, [Object? error, StackTrace? stackTrace]) {
+  static void _dispatch(
+    LogLevel level,
+    String tag,
+    String message, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) {
     for (final output in _outputs) {
       output.write(level, tag, message, error, stackTrace);
     }

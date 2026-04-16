@@ -9,7 +9,9 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 final class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required AuthRepository authRepository}) : _authRepository = authRepository, super(const AuthIdle()) {
+  AuthBloc({required AuthRepository authRepository})
+    : _authRepository = authRepository,
+      super(const AuthIdle()) {
     on<AuthEvent>(
       (event, emit) => switch (event) {
         AuthLoginSubmitted() => _onLoginSubmitted(event, emit),
@@ -46,7 +48,10 @@ final class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onGoogleSignInRequested(AuthGoogleSignInRequested event, Emitter<AuthState> emit) async {
+  Future<void> _onGoogleSignInRequested(
+    AuthGoogleSignInRequested event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthSubmitting());
     try {
       final session = await _authRepository.signInWithGoogle();

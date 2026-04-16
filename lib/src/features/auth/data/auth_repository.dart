@@ -30,9 +30,11 @@ final RegExp _kEmailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 const int _kMinPasswordLength = 6;
 
 final class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl({required AuthRemoteDataSource remoteDataSource, required AuthSessionStorage sessionStorage})
-    : _remoteDataSource = remoteDataSource,
-      _sessionStorage = sessionStorage;
+  AuthRepositoryImpl({
+    required AuthRemoteDataSource remoteDataSource,
+    required AuthSessionStorage sessionStorage,
+  }) : _remoteDataSource = remoteDataSource,
+       _sessionStorage = sessionStorage;
 
   final AuthRemoteDataSource _remoteDataSource;
   final AuthSessionStorage _sessionStorage;
@@ -83,7 +85,12 @@ final class AuthRepositoryImpl implements AuthRepository {
     try {
       await _remoteDataSource.logout();
     } on Object catch (error, stack) {
-      AppLogger.warning(_kLogTag, 'Remote logout failed; clearing local session anyway', error, stack);
+      AppLogger.warning(
+        _kLogTag,
+        'Remote logout failed; clearing local session anyway',
+        error,
+        stack,
+      );
     }
     await _sessionStorage.clear();
     _sessionSubject.add(null);

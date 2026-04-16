@@ -10,7 +10,12 @@ class SettingsOption<T> {
 }
 
 class SettingsSelectionSheet<T> extends StatelessWidget {
-  const SettingsSelectionSheet({required this.title, required this.options, required this.selectedValue, super.key});
+  const SettingsSelectionSheet({
+    required this.title,
+    required this.options,
+    required this.selectedValue,
+    super.key,
+  });
 
   final String title;
   final List<SettingsOption<T>> options;
@@ -31,7 +36,9 @@ class SettingsSelectionSheet<T> extends StatelessWidget {
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: 0.8)),
+                border: Border.all(
+                  color: context.colorScheme.outlineVariant.withValues(alpha: 0.8),
+                ),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -45,11 +52,16 @@ class SettingsSelectionSheet<T> extends StatelessWidget {
                       ListTile(
                         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                         title: Text(option.label, style: context.orbTextTheme.titleSmall),
-                        trailing: isSelected ? Icon(Icons.check_rounded, color: context.orbColorScheme.primary) : null,
+                        trailing: isSelected
+                            ? Icon(Icons.check_rounded, color: context.orbColorScheme.primary)
+                            : null,
                         onTap: () => Navigator.of(context).pop(option.value),
                       ),
                       if (index < options.length - 1)
-                        Divider(height: 1, color: context.colorScheme.outlineVariant.withValues(alpha: 0.6)),
+                        Divider(
+                          height: 1,
+                          color: context.colorScheme.outlineVariant.withValues(alpha: 0.6),
+                        ),
                     ],
                   );
                 }),

@@ -50,7 +50,10 @@ class HomeUserSection extends StatelessWidget {
                   radius: 28,
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
-                  child: Text(initials.isEmpty ? '?' : initials, style: context.orbTextTheme.titleLarge),
+                  child: Text(
+                    initials.isEmpty ? '?' : initials,
+                    style: context.orbTextTheme.titleLarge,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -59,7 +62,9 @@ class HomeUserSection extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         context.l10n.homeActiveUserTitle,
-                        style: context.orbTextTheme.labelLarge.copyWith(color: colorScheme.onSurfaceVariant),
+                        style: context.orbTextTheme.labelLarge.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Text(user.displayName, style: context.orbTextTheme.headlineMedium),

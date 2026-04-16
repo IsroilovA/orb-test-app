@@ -60,7 +60,8 @@ class _LocalizationScopeState extends State<LocalizationScope> {
   }
 
   @override
-  Widget build(BuildContext context) => _LocalizationNotifier(notifier: _notifier, child: widget.child);
+  Widget build(BuildContext context) =>
+      _LocalizationNotifier(notifier: _notifier, child: widget.child);
 }
 
 class _LocalizationNotifier extends InheritedNotifier<LocaleNotifier> {

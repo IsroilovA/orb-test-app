@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:orb_test_app/src/core/api_client/api_client.dart';
 import 'package:orb_test_app/src/core/init/app_dependencies.dart';
 import 'package:orb_test_app/src/core/storage/key_value_storage.dart';
 import 'package:orb_test_app/src/core/storage/shared_preferences_key_value_storage.dart';
@@ -87,7 +88,8 @@ class _InheritedAppDependenciesScope extends InheritedWidget {
 
   final AppScopeData data;
 
-  static _InheritedAppDependenciesScope? maybeOf(BuildContext context, {bool listen = true}) => listen
+  static _InheritedAppDependenciesScope? maybeOf(BuildContext context, {bool listen = true}) =>
+      listen
       ? context.dependOnInheritedWidgetOfExactType<_InheritedAppDependenciesScope>()
       : context.getInheritedWidgetOfExactType<_InheritedAppDependenciesScope>();
 
@@ -105,6 +107,7 @@ class _InheritedAppDependenciesScope extends InheritedWidget {
 
 extension AppDependenciesScopeContextX on BuildContext {
   AppDependencies get dependencies => AppDependenciesScope.of(this).dependencies;
+  ApiClient get apiClient => AppDependenciesScope.of(this).dependencies.apiClient;
   KeyValueStorage get keyValueStorage => AppDependenciesScope.of(this).dependencies.keyValueStorage;
   AuthRepository get authRepository => AppDependenciesScope.of(this).dependencies.authRepository;
   AuthGate get authGate => AppDependenciesScope.of(this).dependencies.authGate;

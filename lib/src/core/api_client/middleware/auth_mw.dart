@@ -7,14 +7,8 @@ import 'package:orb_test_app/src/core/api_client/api_client.dart';
 /// It should return `null` if no token is available.
 typedef TokenProvider = Future<String?> Function();
 
-/// A function that attempts to refresh an authentication token.
-/// It receives the [ApiClientAuthorizationException] that triggered the refresh attempt.
-/// It should return the new token, or `null` if refreshing fails.
-typedef TokenRefresher = Future<String?> Function(ApiClientAuthorizationException error);
-
-/// Called when token refresh succeeds but the retried request still returns 401,
-/// indicating an irrecoverable auth failure.
-typedef OnPermanentAuthFailure = Future<void> Function();
+/// Called when a request fails with `401 Unauthorized`.
+typedef OnUnauthorized = Future<void> Function();
 
 /// A function that builds the authorization header map from a given token.
 typedef AuthHeaderBuilder = Map<String, String> Function(String token);
@@ -23,77 +17,48 @@ typedef AuthHeaderBuilder = Map<String, String> Function(String token);
 /// Creates a `{'Authorization': 'Bearer <token>'}` map.
 Map<String, String> _defaultHeaderBuilder(String token) => {'Authorization': 'Bearer $token'};
 
-/// A middleware that injects an authentication token into requests and
-/// can automatically handle token refresh logic.
+/// A middleware that injects an authentication token into requests.
 @immutable
 class ApiClientAuthMiddleware implements ApiClientMiddleware {
   /// Creates a new [ApiClientAuthMiddleware].
   ///
   /// - [tokenProvider]: A required function to get the current auth token.
-  /// - [tokenRefresher]: An optional function to refresh an expired token.
-  /// - [onPermanentAuthFailure]: Called when retry after refresh also returns 401.
+  /// - [onUnauthorized]: Called when a request returns 401.
   /// - [headerBuilder]: An optional function to customize the auth header.
   const ApiClientAuthMiddleware({
     required this.tokenProvider,
-    this.tokenRefresher,
-    this.onPermanentAuthFailure,
+    this.onUnauthorized,
     AuthHeaderBuilder? headerBuilder,
   }) : _headerBuilder = headerBuilder ?? _defaultHeaderBuilder;
 
   /// The function that provides the current access token.
   final TokenProvider tokenProvider;
 
-  /// The function that refreshes the access token.
-  final TokenRefresher? tokenRefresher;
-
-  /// Called when a refreshed token is also rejected (retry returns 401).
-  final OnPermanentAuthFailure? onPermanentAuthFailure;
+  /// Called when a request returns 401.
+  final OnUnauthorized? onUnauthorized;
 
   /// The function that builds the authorization header.
   final AuthHeaderBuilder _headerBuilder;
 
-  /// Context key used to bypass auth header injection and token refresh.
+  /// Context key used to bypass auth header injection.
   static const skipAuthKey = 'skipAuth';
 
   @override
   ApiClientHandler call(ApiClientHandler innerHandler) => (request, context) async {
     if (context[skipAuthKey] == true) return innerHandler(request, context);
 
-    // 1. Get the initial token and add it to the request.
     final initialToken = await tokenProvider();
     var authorizedRequest = request;
     if (initialToken != null) {
       final authHeaders = _headerBuilder(initialToken);
-      // Create a new request with the added headers.
-      // It's important not to mutate the original request.
       authorizedRequest = ApiClientRequest(cloneBaseRequest(request)..headers.addAll(authHeaders));
     }
 
     try {
-      // 2. Attempt the request with the token.
       return await innerHandler(authorizedRequest, context);
-    } on ApiClientAuthorizationException catch (error) {
-      // 3. If it fails with an auth error, attempt to refresh the token.
-      final refresher = tokenRefresher;
-      if (refresher == null) {
-        rethrow; // No refresher provided, so rethrow the original error.
-      }
-
-      final newToken = await refresher(error);
-      if (newToken == null) {
-        rethrow; // Token refresh failed, so rethrow.
-      }
-
-      // 4. If refresh is successful, retry the request with the new token.
-      final newAuthHeaders = _headerBuilder(newToken);
-      final retriedRequest = ApiClientRequest(cloneBaseRequest(authorizedRequest)..headers.addAll(newAuthHeaders));
-      try {
-        return await innerHandler(retriedRequest, context);
-      } on ApiClientAuthorizationException {
-        // Retry also rejected — session is irrecoverably invalid.
-        await onPermanentAuthFailure?.call();
-        rethrow;
-      }
+    } on ApiClientAuthorizationException {
+      await onUnauthorized?.call();
+      rethrow;
     }
   };
 }

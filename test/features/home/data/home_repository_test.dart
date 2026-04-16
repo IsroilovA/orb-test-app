@@ -34,12 +34,17 @@ void main() {
   setUp(() {
     authRepository = _MockAuthRepository();
     remoteDataSource = _MockHomeRemoteDataSource();
-    repository = HomeRepositoryImpl(authRepository: authRepository, remoteDataSource: remoteDataSource);
+    repository = HomeRepositoryImpl(
+      authRepository: authRepository,
+      remoteDataSource: remoteDataSource,
+    );
   });
 
   test('returns overview for active session', () async {
     when(() => authRepository.currentSession).thenReturn(session);
-    when(() => remoteDataSource.loadBusinesses(userEmail: session.user.email)).thenAnswer((_) async => businesses);
+    when(
+      () => remoteDataSource.loadBusinesses(userEmail: session.user.email),
+    ).thenAnswer((_) async => businesses);
 
     final overview = await repository.loadOverview();
 
@@ -53,5 +58,31 @@ void main() {
 
     await expectLater(repository.loadOverview(), throwsA(isA<HomeUnauthenticatedError>()));
     verifyNever(() => remoteDataSource.loadBusinesses(userEmail: any(named: 'userEmail')));
+  });
+
+  test('wraps unexpected remote errors in HomeLoadFailedError', () async {
+    when(() => authRepository.currentSession).thenReturn(session);
+    when(
+      () => remoteDataSource.loadBusinesses(userEmail: session.user.email),
+    ).thenThrow(Exception('boom'));
+
+    await expectLater(
+      repository.loadOverview(),
+      throwsA(
+        isA<HomeLoadFailedError>().having(
+          (HomeLoadFailedError error) => error.cause,
+          'cause',
+          isA<Exception>(),
+        ),
+      ),
+    );
+  });
+
+  test('rethrows existing HomeError values unchanged', () async {
+    const error = HomeLoadFailedError(cause: 'boom');
+    when(() => authRepository.currentSession).thenReturn(session);
+    when(() => remoteDataSource.loadBusinesses(userEmail: session.user.email)).thenThrow(error);
+
+    await expectLater(repository.loadOverview(), throwsA(same(error)));
   });
 }

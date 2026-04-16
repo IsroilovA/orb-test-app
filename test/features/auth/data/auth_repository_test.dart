@@ -65,6 +65,31 @@ void main() {
     verify(() => storage.write(session)).called(1);
   });
 
+  test('signup persists session and emits on stream', () async {
+    when(
+      () => remote.signup(
+        email: any(named: 'email'),
+        password: any(named: 'password'),
+      ),
+    ).thenAnswer((_) async => session);
+
+    final result = await repository.signup(email: 'test@test.com', password: 'password');
+
+    expect(result, session);
+    expect(repository.currentSession, session);
+    verify(() => storage.write(session)).called(1);
+  });
+
+  test('signInWithGoogle persists session and emits on stream', () async {
+    when(remote.signInWithGoogle).thenAnswer((_) async => session);
+
+    final result = await repository.signInWithGoogle();
+
+    expect(result, session);
+    expect(repository.currentSession, session);
+    verify(() => storage.write(session)).called(1);
+  });
+
   test('login rejects malformed email with validation error', () async {
     await expectLater(
       repository.login(email: 'not-an-email', password: 'password'),
@@ -79,7 +104,10 @@ void main() {
   });
 
   test('login rejects short password with validation error', () async {
-    await expectLater(repository.login(email: 'test@test.com', password: '123'), throwsA(isA<AuthValidationError>()));
+    await expectLater(
+      repository.login(email: 'test@test.com', password: '123'),
+      throwsA(isA<AuthValidationError>()),
+    );
   });
 
   test('signOut clears storage and emits null', () async {
@@ -87,6 +115,17 @@ void main() {
     await repository.initialize();
     expect(repository.currentSession, session);
 
+    await repository.signOut();
+
+    expect(repository.currentSession, isNull);
+    verify(storage.clear).called(1);
+  });
+
+  test('signOut clears local session when remote logout fails', () async {
+    when(storage.read).thenAnswer((_) async => session);
+    when(remote.logout).thenThrow(Exception('network down'));
+
+    await repository.initialize();
     await repository.signOut();
 
     expect(repository.currentSession, isNull);
