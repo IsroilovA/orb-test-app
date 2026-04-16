@@ -67,6 +67,7 @@ class HomeScreen extends StatelessWidget {
 
               return ListView(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   HomeUserSection(user: overview.user, businesses: overview.businesses),
                   const SizedBox(height: 28),

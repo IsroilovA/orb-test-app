@@ -79,6 +79,8 @@ ThemeData appThemeFromBrightness(Brightness brightness) {
   };
 
   final textTheme = OrbTextTheme.fromColorTheme(colorTheme);
+  final buttonShape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(12));
+  final inputBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(4));
 
   return ThemeData(
     useMaterial3: true,
@@ -167,31 +169,22 @@ ThemeData appThemeFromBrightness(Brightness brightness) {
       filled: true,
       fillColor: isDark ? colorTheme.surfaceContainer : colorTheme.surfaceContainerLow,
       border: InputBorder.none,
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+      errorBorder: inputBorder.copyWith(borderSide: BorderSide(width: 2, color: colorTheme.error)),
+      focusedErrorBorder: inputBorder.copyWith(
         borderSide: BorderSide(width: 2, color: colorTheme.error),
       ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: BorderSide(width: 2, color: colorTheme.error),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+      focusedBorder: inputBorder.copyWith(
         borderSide: BorderSide(width: 2, color: colorTheme.primary),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: BorderSide(color: colorTheme.outline),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+      enabledBorder: inputBorder.copyWith(borderSide: BorderSide(color: colorTheme.outline)),
+      disabledBorder: inputBorder.copyWith(
         borderSide: BorderSide(color: colorTheme.onSurfaceVariant.withAlpha(40)),
       ),
     ),
     chipTheme: ChipThemeData(
       padding: EdgeInsets.zero,
       backgroundColor: colorTheme.primary,
-      labelStyle: TextStyle(color: colorTheme.onPrimary),
+      labelStyle: textTheme.labelLarge.copyWith(color: colorTheme.onPrimary),
       shape: const StadiumBorder(),
     ),
     iconTheme: IconThemeData(color: colorTheme.onSurface),
@@ -201,7 +194,21 @@ ThemeData appThemeFromBrightness(Brightness brightness) {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         backgroundColor: colorTheme.primary,
         foregroundColor: colorTheme.onPrimary,
-        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        disabledBackgroundColor: colorTheme.onSurface.withValues(alpha: isDark ? 0.16 : 0.12),
+        disabledForegroundColor: colorTheme.onSurface.withValues(alpha: isDark ? 0.38 : 0.38),
+        textStyle: textTheme.labelLarge,
+        shape: buttonShape,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        foregroundColor: colorTheme.onSurface,
+        disabledForegroundColor: colorTheme.onSurface.withValues(alpha: isDark ? 0.38 : 0.38),
+        textStyle: textTheme.labelLarge,
+        shape: buttonShape,
+        side: BorderSide(color: colorTheme.outline),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -209,6 +216,9 @@ ThemeData appThemeFromBrightness(Brightness brightness) {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         foregroundColor: colorTheme.onSurfaceVariant,
+        disabledForegroundColor: colorTheme.onSurface.withValues(alpha: isDark ? 0.38 : 0.38),
+        textStyle: textTheme.labelLarge,
+        shape: buttonShape,
       ),
     ),
   );

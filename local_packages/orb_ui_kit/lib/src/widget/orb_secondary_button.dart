@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orb_ui_kit/src/widget/orb_button_loading_indicator.dart';
 
 class OrbSecondaryButton extends StatelessWidget {
   const OrbSecondaryButton({
@@ -17,9 +18,12 @@ class OrbSecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const OutlinedButton(
+      final disabledForegroundColor = Theme.of(context).outlinedButtonTheme.style?.foregroundColor
+          ?.resolve(const <WidgetState>{WidgetState.disabled});
+
+      return OutlinedButton(
         onPressed: null,
-        child: SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2)),
+        child: OrbButtonLoadingIndicator(color: disabledForegroundColor),
       );
     }
     final icon = this.icon;

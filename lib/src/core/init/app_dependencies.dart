@@ -2,7 +2,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:orb_test_app/src/core/api_client/api_client.dart';
 import 'package:orb_test_app/src/core/api_client/middleware/auth_mw.dart';
 import 'package:orb_test_app/src/core/api_client/middleware/logger_mw.dart';
-import 'package:orb_test_app/src/core/api_client/middleware/retry_mw.dart';
 import 'package:orb_test_app/src/core/storage/key_value_storage.dart';
 import 'package:orb_test_app/src/features/auth/data/auth_remote_data_source.dart';
 import 'package:orb_test_app/src/features/auth/data/auth_repository.dart';
@@ -31,7 +30,6 @@ final class AppDependencies {
           tokenProvider: () async => authRepository.currentSession?.accessToken,
           onUnauthorized: authRepository.signOut,
         ),
-        const ApiClientRetryMiddleware(),
       ],
     );
     authGate = AuthGate(authRepository: authRepository);
