@@ -8,6 +8,38 @@
   "@homeTitle": {
     "description": "Title on the home placeholder screen."
   },
+  "homeActiveUserTitle": "Active user",
+  "@homeActiveUserTitle": {
+    "description": "Section title for the signed in user summary on the home screen."
+  },
+  "homeBusinessesTitle": "Businesses",
+  "@homeBusinessesTitle": {
+    "description": "Section title for the businesses list on the home screen."
+  },
+  "homeBusinessRevenueLabel": "Revenue: {amount}",
+  "@homeBusinessRevenueLabel": {
+    "description": "Revenue label shown on each home business card.",
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "homeBusinessEmployeesLabel": "Employees: {count}",
+  "@homeBusinessEmployeesLabel": {
+    "description": "Employee count label shown on each home business card.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeRetryCta": "Try again",
+  "@homeRetryCta": {
+    "description": "Retry button label on the home screen load failure state."
+  },
+  "homeLoadError": "We couldn't load your businesses right now.",
+  "@homeLoadError": {
+    "description": "Fallback error message when the home overview fails to load."
+  },
   "settingsTitle": "Settings",
   "@settingsTitle": {
     "description": "Title on the settings placeholder screen."

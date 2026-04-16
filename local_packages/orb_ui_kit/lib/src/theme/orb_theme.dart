@@ -82,7 +82,10 @@ ThemeData appThemeFromBrightness(Brightness brightness) {
 
   return ThemeData(
     useMaterial3: true,
-    disabledColor: Color.alphaBlend(colorTheme.onSurface.withValues(alpha: isDark ? 0.16 : 0.12), colorTheme.surface),
+    disabledColor: Color.alphaBlend(
+      colorTheme.onSurface.withValues(alpha: isDark ? 0.16 : 0.12),
+      colorTheme.surface,
+    ),
     primaryColor: colorTheme.primary,
     scaffoldBackgroundColor: colorTheme.surface,
     shadowColor: colorTheme.onSurface.withValues(alpha: isDark ? 0.7 : 0.5),

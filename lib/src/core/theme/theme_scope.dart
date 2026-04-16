@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orb_test_app/src/app/root_scope.dart';
+import 'package:orb_test_app/src/core/init/app_dependencies_scope.dart';
 import 'package:orb_test_app/src/core/storage/key_value_storage.dart';
 
 const _kThemeModeKey = 'theme.mode';
@@ -33,7 +33,8 @@ class ThemeScope extends StatefulWidget {
   final Widget child;
 
   static ThemeMode of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier?.value ?? ThemeMode.system;
+      context.dependOnInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier?.value ??
+      ThemeMode.system;
 
   static ThemeModeNotifier controllerOf(BuildContext context) {
     final notifier = context.getInheritedWidgetOfExactType<_ThemeNotifier>()?.notifier;

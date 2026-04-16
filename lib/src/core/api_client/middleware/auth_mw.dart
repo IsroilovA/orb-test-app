@@ -86,7 +86,9 @@ class ApiClientAuthMiddleware implements ApiClientMiddleware {
 
       // 4. If refresh is successful, retry the request with the new token.
       final newAuthHeaders = _headerBuilder(newToken);
-      final retriedRequest = ApiClientRequest(cloneBaseRequest(authorizedRequest)..headers.addAll(newAuthHeaders));
+      final retriedRequest = ApiClientRequest(
+        cloneBaseRequest(authorizedRequest)..headers.addAll(newAuthHeaders),
+      );
       try {
         return await innerHandler(retriedRequest, context);
       } on ApiClientAuthorizationException {

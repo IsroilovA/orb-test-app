@@ -177,7 +177,11 @@ final class OrbColorScheme extends ThemeExtension<OrbColorScheme> {
       surfaceContainerLow: Color.lerp(surfaceContainerLow, other.surfaceContainerLow, t)!,
       surfaceContainer: Color.lerp(surfaceContainer, other.surfaceContainer, t)!,
       surfaceContainerHigh: Color.lerp(surfaceContainerHigh, other.surfaceContainerHigh, t)!,
-      surfaceContainerHighest: Color.lerp(surfaceContainerHighest, other.surfaceContainerHighest, t)!,
+      surfaceContainerHighest: Color.lerp(
+        surfaceContainerHighest,
+        other.surfaceContainerHighest,
+        t,
+      )!,
       onSurface: Color.lerp(onSurface, other.onSurface, t)!,
       onSurfaceVariant: Color.lerp(onSurfaceVariant, other.onSurfaceVariant, t)!,
       outline: Color.lerp(outline, other.outline, t)!,

@@ -25,7 +25,8 @@ final class ApiClientResponse {
 
 /// A function that takes a [BaseRequest] and returns a [StreamedResponse].
 /// The [context] parameter is a map that can be used to store data that should be available to all middleware.
-typedef ApiClientHandler = Future<ApiClientResponse> Function(ApiClientRequest request, Map<String, Object?> context);
+typedef ApiClientHandler =
+    Future<ApiClientResponse> Function(ApiClientRequest request, Map<String, Object?> context);
 
 /// An interface for a middleware that can be used to intercept and modify request and response.
 abstract class ApiClientMiddleware {
@@ -84,7 +85,12 @@ ApiClientHandler _createHandler(Client internalClient, MiddlewareChain middlewar
       completer.completeError(error, stackTrace);
     } else {
       completer.completeError(
-        ApiClientClientException(code: 'unknown_error', message: 'Unknown error.', statusCode: 0, error: error),
+        ApiClientClientException(
+          code: 'unknown_error',
+          message: 'Unknown error.',
+          statusCode: 0,
+          error: error,
+        ),
         stackTrace,
       );
     }

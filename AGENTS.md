@@ -22,8 +22,8 @@ flutter test test/path/to/test_file.dart
 # Run a specific test by name
 flutter test --name "test name"
 
-# Format code (120 char line width)
-dart format -l 120 lib/ test/
+# Format code (100 char line width)
+dart format -l 100 lib/ test/
 
 # Analyze (strict lint — fix everything before finalizing)
 flutter analyze

@@ -9,7 +9,9 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.settingsTitle)),
-      body: Center(child: Text(context.l10n.settingsTitle, style: context.orbTextTheme.headlineMedium)),
+      body: Center(
+        child: Text(context.l10n.settingsTitle, style: context.orbTextTheme.headlineMedium),
+      ),
     );
   }
 }

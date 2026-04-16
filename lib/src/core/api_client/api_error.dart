@@ -10,7 +10,8 @@ sealed class ApiError implements Exception, Localizable {
   factory ApiError.fromApiException(ApiClientException e) {
     return switch (e) {
       ApiClientAuthorizationException() => const ApiUnauthorizedError(),
-      ApiClientNetworkException(:final statusCode) when statusCode >= 500 => const ApiInternalError(),
+      ApiClientNetworkException(:final statusCode) when statusCode >= 500 =>
+        const ApiInternalError(),
       ApiClientNetworkException() => const ApiNetworkError(),
       ApiClientClientException(:final statusCode, :final data, :final responseHeaders) => () {
         final code = _serverErrorCode(data);

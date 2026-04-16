@@ -79,7 +79,10 @@ void main() {
   });
 
   test('login rejects short password with validation error', () async {
-    await expectLater(repository.login(email: 'test@test.com', password: '123'), throwsA(isA<AuthValidationError>()));
+    await expectLater(
+      repository.login(email: 'test@test.com', password: '123'),
+      throwsA(isA<AuthValidationError>()),
+    );
   });
 
   test('signOut clears storage and emits null', () async {

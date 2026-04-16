@@ -15,8 +15,8 @@ flutter test
 # Analyze (inherits strict rules from ../../analysis_options.yaml)
 flutter analyze
 
-# Format (120 char line width)
-dart format -l 120 lib/ test/
+# Format (100 char line width)
+dart format -l 100 lib/ test/
 ```
 
 ## Architecture

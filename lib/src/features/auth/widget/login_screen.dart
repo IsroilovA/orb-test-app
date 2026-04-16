@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helm/helm.dart';
-import 'package:orb_test_app/src/app/root_scope.dart';
+import 'package:orb_test_app/src/core/init/app_dependencies_scope.dart';
 import 'package:orb_test_app/src/core/localization/l10n.dart';
 import 'package:orb_test_app/src/core/routing/orb_routes.dart';
 import 'package:orb_test_app/src/features/auth/bloc/auth_bloc.dart';
@@ -23,7 +23,8 @@ class LoginScreen extends StatelessWidget {
             child: AuthCredentialsForm(
               submitLabel: l10n.authLoginCta,
               toggleLabel: l10n.authToggleToSignup,
-              buildSubmitEvent: (email, password) => AuthLoginSubmitted(email: email, password: password),
+              buildSubmitEvent: (email, password) =>
+                  AuthLoginSubmitted(email: email, password: password),
               onToggle: () => HelmRouter.push(context, OrbRoutes.signup),
             ),
           ),

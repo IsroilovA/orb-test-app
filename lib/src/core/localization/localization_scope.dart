@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:orb_test_app/src/app/root_scope.dart';
+import 'package:orb_test_app/src/core/init/app_dependencies_scope.dart';
 import 'package:orb_test_app/src/core/storage/key_value_storage.dart';
 
 const _kLocaleKey = 'localization.locale';
@@ -60,7 +60,8 @@ class _LocalizationScopeState extends State<LocalizationScope> {
   }
 
   @override
-  Widget build(BuildContext context) => _LocalizationNotifier(notifier: _notifier, child: widget.child);
+  Widget build(BuildContext context) =>
+      _LocalizationNotifier(notifier: _notifier, child: widget.child);
 }
 
 class _LocalizationNotifier extends InheritedNotifier<LocaleNotifier> {

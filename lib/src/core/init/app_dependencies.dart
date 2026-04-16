@@ -9,9 +9,14 @@ import 'package:orb_test_app/src/features/auth/domain/auth_gate.dart';
 final class AppDependencies {
   AppDependencies({required this.keyValueStorage}) {
     const secureStorage = FlutterSecureStorage();
-    final AuthSessionStorage sessionStorage = SecureAuthSessionStorage(secureStorage: secureStorage);
+    final AuthSessionStorage sessionStorage = SecureAuthSessionStorage(
+      secureStorage: secureStorage,
+    );
     final AuthRemoteDataSource remoteDataSource = MockAuthRemoteDataSource();
-    authRepository = AuthRepositoryImpl(remoteDataSource: remoteDataSource, sessionStorage: sessionStorage);
+    authRepository = AuthRepositoryImpl(
+      remoteDataSource: remoteDataSource,
+      sessionStorage: sessionStorage,
+    );
     authGate = AuthGate(authRepository: authRepository);
   }
 

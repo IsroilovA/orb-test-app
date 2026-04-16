@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class OrbPrimaryButton extends StatelessWidget {
-  const OrbPrimaryButton({required this.onPressed, required this.label, this.icon, this.isLoading = false, super.key});
+  const OrbPrimaryButton({
+    required this.onPressed,
+    required this.label,
+    this.icon,
+    this.isLoading = false,
+    super.key,
+  });
 
   final VoidCallback? onPressed;
   final String label;

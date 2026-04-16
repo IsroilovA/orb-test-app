@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helm/helm.dart';
-import 'package:orb_test_app/src/app/root_scope.dart';
+import 'package:orb_test_app/src/core/init/app_dependencies_scope.dart';
 import 'package:orb_test_app/src/core/routing/orb_routes.dart';
 import 'package:orb_test_app/src/features/auth/domain/auth_gate.dart';
 
@@ -10,8 +10,12 @@ mixin RouterStateMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     super.initState();
-    final authGate = RootScope.of(context).authGate;
-    router = HelmRouter(routes: OrbRoutes.values, refresh: authGate, guards: <NavigationGuard>[_authGuard(authGate)]);
+    final authGate = AppDependenciesScope.of(context).dependencies.authGate;
+    router = HelmRouter(
+      routes: OrbRoutes.values,
+      refresh: authGate,
+      guards: <NavigationGuard>[_authGuard(authGate)],
+    );
   }
 }
 

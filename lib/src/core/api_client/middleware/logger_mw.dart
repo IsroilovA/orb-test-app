@@ -42,7 +42,9 @@ class ApiClientLoggerMiddleware implements ApiClientMiddleware {
       }
       final response = await innerHandler(request, context);
       if (logResponse) {
-        _onResponse('[${request.method}] ${request.url.path} -> ok | ${stopwatch.elapsedMilliseconds}ms');
+        _onResponse(
+          '[${request.method}] ${request.url.path} -> ok | ${stopwatch.elapsedMilliseconds}ms',
+        );
       }
       return response;
     } on ApiClientException catch (error, stackTrace) {
